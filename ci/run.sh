@@ -21,7 +21,7 @@ case "${TRAVIS_OS_NAME}" in
         TEST_TARGET=x86_64-pc-windows-msvc cargo test --verbose -- --nocapture
         ;;
     *"macos"*)
-        TEST_TARGET=x86_64-apple-darwin cargo test --verbose -- --nocapture
+        TEST_TARGET=x86_64-apple-darwin RUSTC_LOG=debug cargo test --verbose -- --nocapture
         ;;
 esac
 
