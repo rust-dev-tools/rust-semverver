@@ -5,8 +5,8 @@ set -ex
 export RUST_BACKTRACE=full
 #export RUST_TEST_NOCAPTURE=1
 
-cargo build
-cargo test --verbose -- --nocapture
+CARGO_LOG=debug cargo build
+CARGO_LOG=debug cargo test --verbose -- --nocapture
 
 # avoid weird cygwin issues for now
 if [ -n "$APPVEYOR" ]; then
@@ -18,7 +18,7 @@ case "${TRAVIS_OS_NAME}" in
         TEST_TARGET=x86_64-unknown-linux-gnu cargo test --verbose -- --nocapture
         ;;
     *"windows"*)
-        TEST_TARGET=x86_64-pc-windows-msvc cargo test --verbose -- --nocapture
+        CARGO_LOG=debug TEST_TARGET=x86_64-pc-windows-msvc cargo test --verbose -- --nocapture
         ;;
     *"macos"*)
         TEST_TARGET=x86_64-apple-darwin cargo test --verbose -- --nocapture
@@ -31,7 +31,7 @@ cp target/debug/cargo-semver ~/rust/cargo/bin
 cp target/debug/rust-semverver ~/rust/cargo/bin
 
 # become semververver
-PATH=~/rust/cargo/bin:$PATH cargo semver | tee semver_out
+CARGO_LOG=debug PATH=~/rust/cargo/bin:$PATH cargo semver | tee semver_out
 current_version="$(grep -e '^version = .*$' Cargo.toml | cut -d ' ' -f 3)"
 current_version="${current_version%\"}"
 current_version="${current_version#\"}"
