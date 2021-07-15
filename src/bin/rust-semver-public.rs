@@ -39,7 +39,7 @@ fn main() {
 
                     queries.global_ctxt().unwrap().peek_mut().enter(|tcx| {
                         let krate = tcx
-                            .crates()
+                            .crates(())
                             .iter()
                             .flat_map(|crate_num| {
                                 let def_id = crate_num.as_def_id();

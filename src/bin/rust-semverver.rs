@@ -57,7 +57,7 @@ fn main() {
                         // See issue #64 for details.
 
                         let mut crates: Vec<_> = tcx
-                            .crates()
+                            .crates(())
                             .iter()
                             .flat_map(|crate_num| {
                                 let def_id = crate_num.as_def_id();

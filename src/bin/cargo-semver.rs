@@ -496,7 +496,7 @@ impl<'a> WorkInfo<'a> {
             opts.cli_features.features = Rc::new(
                 s.split(' ')
                     .map(InternedString::new)
-                    .map(|f| FeatureValue::new(f))
+                    .map(FeatureValue::new)
                     .collect(),
             );
         }
